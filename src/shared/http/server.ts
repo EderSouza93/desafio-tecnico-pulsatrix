@@ -2,9 +2,10 @@ import 'reflect-metadata';
 import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
+import "@shared/container"
 
 import routes from './routes';
-import { AppDataSource } from 'src/infra/typeorm/data-source';
+import { AppDataSource } from '@shared/typeorm/data-source';
 
 AppDataSource.initialize()
     .then(async () => {
