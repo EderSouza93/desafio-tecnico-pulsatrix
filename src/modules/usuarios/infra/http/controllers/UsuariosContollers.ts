@@ -6,8 +6,6 @@ export default class UsuariosControllers {
     async create(request: Request, response: Response): Promise<void> {
         const { nome, email, senha_hash, tipo } = request.body;
 
-        console.log(senha_hash)
-
         const service = container.resolve(CreateUsuarioService);
 
         const usuario = await service.execute({ nome, email, senha_hash, tipo });

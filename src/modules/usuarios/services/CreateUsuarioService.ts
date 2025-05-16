@@ -5,6 +5,7 @@ import { IUsuarioRepository } from "../domain/repositories/IUsuarioRepository";
 import { Usuario } from "../infra/database/entities/Usuario";
 import AppError from "@shared/errors/AppError";
 import { ICreateUsuarioDTO } from "../domain/models/ICreateUsuarioDTO";
+import "express-async-errors";
 
 
 @injectable()
@@ -20,7 +21,6 @@ export default class CreateUsuarioService {
             throw new AppError('Email já existe.', 409);
         }
 
-        console.log(senha_hash)
         const hashedPassword = await hash(senha_hash, 8)
 
         const usuario = await this.usuarioRepository.create({

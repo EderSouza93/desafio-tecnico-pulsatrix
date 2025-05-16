@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 export type UsuarioTipo = 'MEDICO' | 'PACIENTE';
@@ -14,6 +15,7 @@ export class Usuario {
     email: string;
 
     @Column()
+    @Exclude()
     senha_hash: string;
 
     @Column({ type: 'enum', enum: ['MEDICO', 'PACIENTE'] })
