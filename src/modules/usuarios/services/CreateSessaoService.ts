@@ -2,7 +2,7 @@ import { inject, injectable } from "tsyringe";
 import { IUsuarioRepository } from "../domain/repositories/IUsuarioRepository";
 import AppError from "@shared/errors/AppError";
 import { compare } from "bcrypt";
-import { sign } from "jsonwebtoken";
+import { Secret, sign } from "jsonwebtoken";
 import { Usuario } from "../infra/database/entities/Usuario";
 import "dotenv/config";
 import 'reflect-metadata';
@@ -35,7 +35,7 @@ export default class CreateSessaoService {
             throw new AppError('Combinação de Email/senha incorreta.', 401)
         }
 
-        const token = sign({}, process.env.APP_SECRET as string, {
+        const token = sign({}, process.env.APP_SECRET as Secret, {
             subject: String(usuario.id),
             expiresIn: '8h',
         });
