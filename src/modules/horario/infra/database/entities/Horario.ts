@@ -14,19 +14,9 @@ export class HorarioDisponivel {
   medico_id: number;
 
   @Column({
-    type: "date",
-    transformer: {
-      to(value: string | Date): string {
-        if (value instanceof Date) {
-          return value.toISOString().slice(0, 10);
-        }
-        return value; 
-      },
-      from(value: string): string {
-        return value;
-      },
-    },
-  })
+    type: "varchar",
+    length: 10,
+   })
   data: string;
 
   @Column({ type: "time" })

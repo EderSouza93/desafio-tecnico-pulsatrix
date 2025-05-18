@@ -1,3 +1,5 @@
+import AppError from "@shared/errors/AppError";
+import { format } from "date-fns";
 import { Request, Response } from "express"
 import { CreateHorarioService } from "src/modules/horario/services/CreateHorarioService";
 import { ListHorariosDisponiveisService } from "src/modules/horario/services/ListHorarioService";
@@ -18,7 +20,16 @@ export class HorarioController {
     }
     
     public async create(request: Request, response: Response): Promise<void> {
-        const { medico_id, data, hora_inicio, hora_fim } = request.body;
+        let { medico_id, data, hora_inicio, hora_fim } = request.body;
+
+
+        if (data instanceof Date) {
+            data = data.toISOString().split('T')[0]
+        }
+         else {
+            throw new AppError('Data inválida no corpo da requisição.', 400)
+       }
+
 
         const createHorario = container.resolve(CreateHorarioService);
 

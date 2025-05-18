@@ -17,12 +17,22 @@ export class CreateHorarioService {
 
     ) { }
     
-    public async execute({ medico_id, data, hora_inicio, hora_fim }: ICreateHorarioDTO) {
+    public async execute({
+        medico_id,
+        data,
+        hora_inicio,
+        hora_fim,
+    }: ICreateHorarioDTO) {
         const medico = await this.medicoRepository.findById(medico_id);
 
         if (!medico) {
             throw new AppError('Médico não cadastrado.', 404);
         }
+        
+        if (typeof data !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(data)) {
+          throw new AppError("Data em formato inválido.");
+        }
+
 
         const conflito = await this.horarioRepository.findByHorario(
             medico_id,

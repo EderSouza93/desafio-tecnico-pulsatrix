@@ -54,7 +54,7 @@ export class CreateSchema1747176730646 implements MigrationInterface {
             columns: [
                 { name: 'id', type: 'integer', isPrimary: true, isGenerated: true, generationStrategy: 'increment' },
                 { name: 'medico_id', type: 'integer' },
-                { name: 'data', type: 'date' },
+                { name: 'data', type: 'varchar', length: '10' },
                 { name: 'hora_inicio', type: 'time' },
                 { name: 'hora_fim', type: 'time' },
                 { name: 'criado_em', type: 'timestamp', default: 'now()' },
@@ -74,7 +74,7 @@ export class CreateSchema1747176730646 implements MigrationInterface {
                 { name: 'id', type: 'integer', isPrimary: true, isGenerated: true, generationStrategy: 'increment' },
                 { name: 'paciente_id', type: 'integer' },
                 { name: 'medico_id', type: 'integer' },
-                { name: 'data', type: 'date' },
+                { name: 'data', type: 'varchar', length: '10' },
                 { name: 'hora_inicio', type: 'time' },
                 { name: 'hora_fim', type: 'time' },
                 { name: 'criado_em', type: 'timestamp', default: 'now()' },

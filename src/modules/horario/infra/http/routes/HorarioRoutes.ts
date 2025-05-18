@@ -9,6 +9,7 @@ const controller = new HorarioController();
 
 horarioRoutes.use(AuthMiddleware.execute);
 horarioRoutes.post('/', ensureMedico, horarioSchema, controller.create);
+horarioRoutes.delete('/:id', ensureMedico, controller.delete);
 horarioRoutes.get('/', controller.index);
 
 export default horarioRoutes;
