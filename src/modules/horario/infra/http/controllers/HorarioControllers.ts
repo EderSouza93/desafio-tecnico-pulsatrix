@@ -1,5 +1,4 @@
 import AppError from "@shared/errors/AppError";
-import { format } from "date-fns";
 import { Request, Response } from "express"
 import { CreateHorarioService } from "src/modules/horario/services/CreateHorarioService";
 import { DeleteHorarioService } from "src/modules/horario/services/DeleteHorarioService";

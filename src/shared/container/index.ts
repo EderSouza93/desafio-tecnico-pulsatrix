@@ -7,8 +7,9 @@ import { MedicoRepository } from "src/modules/medico/infra/database/repositories
 import { IPacienteRepository } from "src/modules/paciente/domain/repositories/IPacienteRepository";
 import { PacienteRepository } from "src/modules/paciente/infra/database/repositories/PacienteRepository";
 import { IHorarioRepository } from "src/modules/horario/domain/repositories/IHorarioRepository";
-import { HorarioDisponivel } from "src/modules/horario/infra/database/entities/Horario";
 import { HorarioRepository } from "src/modules/horario/infra/database/repositories/HorarioRepository";
+import { IAgendamentoRepository } from "src/modules/agendamento/domain/repositories/IAgendamentoRepository";
+import { AgendamentoRepository } from "src/modules/agendamento/infra/database/repositories/AgendamentoRepository";
 
 container.registerSingleton<IUsuarioRepository>(
   "UsuarioRepository",
@@ -28,4 +29,9 @@ container.registerSingleton<IPacienteRepository>(
 container.registerSingleton<IHorarioRepository>(
   "HorarioRepository",
   HorarioRepository
+)
+
+container.registerSingleton<IAgendamentoRepository>(
+  "AgendamentoRepository",
+  AgendamentoRepository
 )

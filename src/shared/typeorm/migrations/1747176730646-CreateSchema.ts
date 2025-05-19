@@ -74,10 +74,13 @@ export class CreateSchema1747176730646 implements MigrationInterface {
                 { name: 'id', type: 'integer', isPrimary: true, isGenerated: true, generationStrategy: 'increment' },
                 { name: 'paciente_id', type: 'integer' },
                 { name: 'medico_id', type: 'integer' },
+                { name: 'horario_disponivel_id', type: 'integer', isNullable: true },
                 { name: 'data', type: 'varchar', length: '10' },
                 { name: 'hora_inicio', type: 'time' },
                 { name: 'hora_fim', type: 'time' },
+                { name: 'status', type: 'enum', enum: ['AGENDADO', 'CANCELADO', 'REALIZADO'], default: `'AGENDADO'`},
                 { name: 'criado_em', type: 'timestamp', default: 'now()' },
+                { name: 'atualizado_em', type: 'timestamp', default: 'now()'},
             ],
         }));
 
@@ -95,11 +98,21 @@ export class CreateSchema1747176730646 implements MigrationInterface {
             onDelete: 'CASCADE',
         }));
 
-        await queryRunner.createIndex('agendamento', new TableIndex({
-            name: 'IDX_agendamento_unico',
-            columnNames: ['medico_id', 'data', 'hora_inicio', 'hora_fim'],
-            isUnique: true,
+        await queryRunner.createForeignKey('agendamento', new TableForeignKey({
+            columnNames: ['horario_disponivel_id'],
+            referencedTableName: 'horario_disponivel',
+            referencedColumnNames: ['id'],
+            onDelete: 'SET NULL',
         }));
+
+        await queryRunner.createIndex(
+          "agendamento",
+          new TableIndex({
+            name: "IDX_agendamento_unico",
+            columnNames: ["medico_id", "data", "hora_inicio", "hora_fim"],
+            isUnique: true,
+          })
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
@@ -110,6 +123,7 @@ export class CreateSchema1747176730646 implements MigrationInterface {
         await queryRunner.dropTable('medico');
         await queryRunner.dropTable('usuario');
         await queryRunner.query(`DROP TYPE IF EXISTS "usuario_tipo_enum"`);
+        await queryRunner.query(`DROP TYPE IF EXISTS "agendamento_status_enum"`)
     }
 
 }
