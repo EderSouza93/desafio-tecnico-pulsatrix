@@ -1,4 +1,5 @@
 import { Router } from "express";
+import agendamentoRoutes from "src/modules/agendamento/infra/http/routes/AgendamentoRoutes";
 import horarioRoutes from "src/modules/horario/infra/http/routes/HorarioRoutes";
 import medicoRoutes from "src/modules/medico/infra/http/routes/MedicoRoutes";
 import pacienteRoutes from "src/modules/paciente/infra/http/routes/PacienteRoutes";
@@ -15,5 +16,6 @@ routes.use('/sessoes', sessaoRouter);
 routes.use('/medicos', medicoRoutes);
 routes.use('/pacientes', pacienteRoutes);
 routes.use('/horarios', horarioRoutes);
+routes.use('/agendamentos', agendamentoRoutes);
 
 export default routes;
