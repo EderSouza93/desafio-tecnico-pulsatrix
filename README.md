@@ -31,9 +31,9 @@ src/
 │   ├── horario/
 │   └── agendamento/
 ├── shared/
-|   ├── container/
+│   ├── container/
 │   ├── errors/
-|   ├── http/
+│   ├── http/
 │   ├── middlewares/
 │   ├── utils/
 │   └── typeorm/
@@ -62,11 +62,12 @@ services:
 ```
 
 ### 🔧 Variáveis de conexão no backend
-* Host: `localhost`
-* Port: `5433`
-* User: `developer`
-* Password: `admin`
-* Database: `medical_agenda`
+
+- Host: `localhost`
+- Port: `5433`
+- User: `developer`
+- Password: `admin`
+- Database: `medical_agenda`
 
 ---
 
@@ -90,7 +91,7 @@ npm run dev
 
 ## 📮 Collection do Postman
 
-Incluímos a collection para facilitar os testes da API.
+Incluímos a collection atualizada para facilitar os testes da API.
 
 📁 Arquivo:
 * `postman/Desafio Técnico.postman_collection.json`
@@ -98,12 +99,13 @@ Incluímos a collection para facilitar os testes da API.
 ✅ Inclui todas as rotas:
 * Autenticação (Login)
 * Cadastro de usuários (médico e paciente)
-* Listagem e criação de horários disponíveis
-* Criação, listagem e atualização de agendamentos
+* Listagem, criação e consulta única de horários disponíveis
+* Exclusão de horários
+* Criação, listagem e consulta única e atualização de status de agendamentos
 
 Para usar:
 1. Abra o Postman
-2. Vá em `Import > Arquivo`
+2. Vá em **Import > Arquivo**
 3. Selecione a collection
 4. Configure uma variável de ambiente `{{base_url}}` como `http://localhost:3333`
 
@@ -113,31 +115,37 @@ Para usar:
 
 * Cadastro de usuários com tipo (`MEDICO` ou `PACIENTE`)
 * Autenticação com JWT
-* Cadastro e listagem de horários disponíveis (médico)
-* Agendamento com validação de conflitos e slots de 30 minutos
+* Cadastro, listagem e consulta de horários disponíveis (médico)
+* Exclusão de horários
+* Agendamento com validação de conflitos e slots de 30 minutos (paciente)
+* Consulta de agendamento único (`GET /agendamentos/:id`)
 * Cancelamento e conclusão de agendamento com regras por tipo
+* Endpoints para buscar detalhes de médico e horário por ID (`GET /medicos/:id`, `GET /horarios/:id`)
 * Arquitetura limpa com injeção de dependência
 * Validação de dados com Celebrate (Joi)
 
 ---
 
-## 🖥️ Integração com o Frontend (ex: Bolt AI, React, etc)
-
-Você pode usar uma IA como o **Bolt** ou frameworks React para gerar o frontend.
+## 🖥️ Integração com o Frontend
 
 Endpoints relevantes para o frontend:
 
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| POST | `/login` | Autenticação de usuário |
-| POST | `/usuarios` | Criação de usuário |
-| GET | `/horarios` | Lista horários disponíveis |
-| POST | `/horarios` | Médico cria horário |
-| POST | `/agendamentos` | Paciente agenda horário |
-| PATCH | `/agendamentos/:id/status` | Atualiza status do agendamento |
-| GET | `/agendamentos` | Lista agendamentos do paciente |
+| Método | Endpoint                         | Descrição                                  |
+|--------|----------------------------------|--------------------------------------------|
+| POST   | `/login`                         | Autenticação de usuário                    |
+| POST   | `/usuarios`                      | Criação de usuário                         |
+| GET    | `/horarios`                      | Lista horários disponíveis                 |
+| GET    | `/horarios/:id`                  | Consulta de um horário por ID              |
+| POST   | `/horarios`                      | Médico cria horário                        |
+| DELETE | `/horarios/:id`                  | Médico deleta horário                      |
+| POST   | `/agendamentos`                  | Paciente agenda horário                    |
+| GET    | `/agendamentos`                  | Lista agendamentos do paciente             |
+| GET    | `/agendamentos/:id`              | Consulta de um agendamento por ID          |
+| PATCH  | `/agendamentos/:id/status`       | Atualiza status do agendamento             |
+| GET    | `/medicos/:id`                   | Detalhes de médico por ID                  |
+| GET    | `/pacientes/:id`                 | Detalhes de paciente por ID                |
 
-⚠️ Todas as rotas (exceto login e cadastro) exigem token JWT.
+> ⚠️ Todas as rotas (exceto login e cadastro) exigem token JWT.
 
 ---
 

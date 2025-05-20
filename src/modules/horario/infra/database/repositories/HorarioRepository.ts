@@ -45,7 +45,11 @@ export class HorarioRepository implements IHorarioRepository {
     }
 
     public async findById(id: number): Promise<IHorario | null> {
-        return this.ormRepository.findOneBy({ id });
+        const horario = await this.ormRepository.findOne({
+            where: { id },
+            relations: ['medico'],
+        });
+        return horario ?? null;
     }
 
     public async deleteById(id: number, medico_id: number): Promise<void> {

@@ -1,22 +1,28 @@
 {
 	"info": {
 		"_postman_id": "d78d083f-d0d0-458a-9bf6-cd3d1527dedb",
-		"name": "Desafio Técnico",
+		"name": "Desafio Técnico (Atualizada)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "34936211"
 	},
 	"item": [
 		{
-			"name": "usuarios",
+			"name": "Usuarios",
 			"item": [
 				{
-					"name": "criação",
+					"name": "Criar Usuário",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\":\" Eder\",\r\n    \"email\": \"ederPaciente2@teste.com.br\",\r\n    \"senha_hash\": \"Eder&Lih@93\",\r\n    \"tipo\": \"PACIENTE\"\r\n}",
+							"raw": "{\n    \"nome\": \"Dr. Lucivaldo\",\n    \"email\": \"lucivaldo@teste.com\",\n    \"senha_hash\": \"123456\",\n    \"tipo\": \"MEDICO\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -34,17 +40,22 @@
 								"usuarios"
 							]
 						}
-					},
-					"response": []
+					}
 				},
 				{
-					"name": "sessão",
+					"name": "Login",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"ederMedico@teste.com.br\",\r\n    \"senha_hash\": \"Eder&Lih@93\"\r\n}",
+							"raw": "{\n    \"email\": \"ederMedico@teste.com.br\",\n    \"senha_hash\": \"Eder&Lih@93\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -62,17 +73,81 @@
 								"sessoes"
 							]
 						}
-					},
-					"response": []
+					}
+				}
+			]
+		},
+		{
+			"name": "Medicos",
+			"item": [
+				{
+					"name": "Listar Médicos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3333/medicos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"medicos"
+							]
+						}
+					}
 				},
 				{
-					"name": "medicos",
+					"name": "Mostrar Médico",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3333/medicos/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"medicos",
+								":id"
+							]
+						}
+					}
+				},
+				{
+					"name": "Criar Médico",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 2,\r\n  \"especialidade\": \"Urologista\",\r\n  \"crm\": \"123456/SP\"\r\n}",
+							"raw": "{\n  \"id\": 2,\n  \"especialidade\": \"Urologista\",\n  \"crm\": \"123456/SP\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -90,17 +165,27 @@
 								"medicos"
 							]
 						}
-					},
-					"response": []
-				},
+					}
+				}
+			]
+		},
+		{
+			"name": "Pacientes",
+			"item": [
 				{
-					"name": "pacientes",
+					"name": "Criar Paciente",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": 3,\r\n  \"telefone\": \"79 998543128\",\r\n  \"data_nascimento\": \"09/02/1993\"\r\n}",
+							"raw": "{\n  \"id\": 3,\n  \"telefone\": \"79 998543128\",\n  \"data_nascimento\": \"09/02/1993\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -118,28 +203,57 @@
 								"pacientes"
 							]
 						}
-					},
-					"response": []
+					}
+				},
+				{
+					"name": "Mostrar Paciente",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3333/pacientes/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"pacientes",
+								":id"
+							]
+						}
+					}
 				}
 			]
 		},
 		{
-			"name": "horario",
+			"name": "Horarios",
 			"item": [
 				{
-					"name": "horario",
+					"name": "Criar Horário",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token-me}}",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"medico_id\": 2,\r\n  \"data\": \"2025-05-26\",\r\n  \"hora_inicio\": \"08:00\",\r\n  \"hora_fim\": \"11:00\"\r\n}",
+							"raw": "{\n  \"medico_id\": 2,\n  \"data\": \"2025-05-26\",\n  \"hora_inicio\": \"08:00\",\n  \"hora_fim\": \"11:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -157,22 +271,21 @@
 								"horarios"
 							]
 						}
-					},
-					"response": []
+					}
 				},
 				{
-					"name": "index",
+					"name": "Listar Horários",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token-me}}",
+								"value": "Bearer {{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3333/horarios",
+							"raw": "http://localhost:3333/horarios?medico_id=1&data=2025-05-25",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -184,32 +297,29 @@
 							"query": [
 								{
 									"key": "medico_id",
-									"value": "1",
-									"disabled": true
+									"value": "1"
 								},
 								{
 									"key": "data",
-									"value": "2025-05-25",
-									"disabled": true
+									"value": "2025-05-25"
 								}
 							]
 						}
-					},
-					"response": []
+					}
 				},
 				{
-					"name": "delete",
+					"name": "Mostrar Horário",
 					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token-me}}",
+								"value": "Bearer {{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3333/horarios/1",
+							"raw": "http://localhost:3333/horarios/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -217,31 +327,60 @@
 							"port": "3333",
 							"path": [
 								"horarios",
-								"1"
+								":id"
 							]
 						}
-					},
-					"response": []
+					}
+				},
+				{
+					"name": "Deletar Horário",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3333/horarios/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"horarios",
+								":id"
+							]
+						}
+					}
 				}
 			]
 		},
 		{
-			"name": "agendamentos",
+			"name": "Agendamentos",
 			"item": [
 				{
-					"name": "create",
+					"name": "Criar Agendamento",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token-me}}",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"medico_id\": 2,\r\n  \"data\": \"2025-05-26\",\r\n  \"hora_inicio\": \"10:00:00\",\r\n  \"hora_fim\": \"10:30:00\"\r\n}\r\n",
+							"raw": "{\n  \"medico_id\": 2,\n  \"data\": \"2025-05-26\",\n  \"hora_inicio\": \"10:00:00\",\n  \"hora_fim\": \"10:30:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -259,23 +398,51 @@
 								"agendamentos"
 							]
 						}
-					},
-					"response": []
+					}
 				},
 				{
-					"name": "updateStatus",
+					"name": "Listar Agendamentos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3333/agendamentos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"agendamentos"
+							]
+						}
+					}
+				},
+				{
+					"name": "Atualizar Status Agendamento",
 					"request": {
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{token-pa}}",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"status\": \"CANCELADO\"\r\n}",
+							"raw": "{\n  \"status\": \"CANCELADO\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -283,7 +450,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3333/agendamentos/1/status",
+							"raw": "http://localhost:3333/agendamentos/:id/status",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -291,77 +458,42 @@
 							"port": "3333",
 							"path": [
 								"agendamentos",
-								"1",
+								":id",
 								"status"
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "list",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token-pa}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:3333/agendamentos/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3333",
-							"path": [
-								"agendamentos",
-								""
-							]
-						}
-					},
-					"response": []
+					}
 				}
 			]
 		},
 		{
-			"name": "health",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"packages": {},
-				"exec": [
-					""
-				]
-			}
+			"name": "Health",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3333/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"health"
+							]
+						}
+					}
+				}
+			]
 		}
 	],
 	"variable": [
 		{
-			"key": "{{token}}",
-			"value": "",
-			"type": "string"
+			"key": "token",
+			"value": ""
 		}
 	]
 }

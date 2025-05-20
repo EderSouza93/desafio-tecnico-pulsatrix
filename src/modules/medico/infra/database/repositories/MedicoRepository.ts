@@ -20,7 +20,10 @@ export class MedicoRepository implements IMedicoRepository {
     }
 
     public async findById(id: number): Promise<IMedico | null> {
-        return this.ormRepository.findOneBy({ id });
+        return this.ormRepository.findOne({
+            where: { id },
+            relations: ['usuario']
+        });
     }
 
     public async findAll(nome?: string, especialidade?: string): Promise<IListMedicos> {

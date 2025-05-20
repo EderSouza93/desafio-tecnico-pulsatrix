@@ -9,5 +9,6 @@ const controller = new MedicoController();
 medicoRoutes.post('/', medicoSchema, controller.create);
 medicoRoutes.use(AuthMiddleware.execute);
 medicoRoutes.get('/', controller.index);
+medicoRoutes.get('/id:', controller.show);
 
 export default medicoRoutes;

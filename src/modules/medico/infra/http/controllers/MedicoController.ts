@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { CreateMedicoService } from "src/modules/medico/services/CreateMedicoService";
 import { ListMedicosService } from "src/modules/medico/services/ListMedicosServices";
+import ShowMedicoService from "src/modules/medico/services/ShowMedicoService";
 import { container } from "tsyringe";
 
 export class MedicoController {
@@ -21,4 +22,12 @@ export class MedicoController {
         const medicos = await service.execute();
         response.json(medicos);
     }
+
+    public async show(request: Request, response: Response): Promise<void> {
+        const { id } = request.params;
+        const service = container.resolve(ShowMedicoService);
+        const medico = await service.execute({ id });
+        response.json(medico);
+    }
+
 }
