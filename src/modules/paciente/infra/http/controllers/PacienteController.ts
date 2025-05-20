@@ -4,7 +4,8 @@ import { container } from "tsyringe";
 
 export class PacienteController {
     public async create(request: Request, response: Response): Promise<void> {
-        const { id, telefone, data_nascimento } = request.body;
+        const { telefone, data_nascimento } = request.body;
+        const id = Number(request.body.id)
 
         const createPaciente = container.resolve(CreatePacienteService);
 
